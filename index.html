@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+  <title>Top Indian News</title>
+  <link rel="icon"
+    href="https://media.discordapp.net/attachments/733559489818525707/923826148230696980/icon.png?width=468&height=468">
+</head>
+
+
+<body>
+  <nav class="navbar navbar-dark bg-dark shadow">
+    <div class="container-fluid justify-content-center">
+      <a class="navbar-brand" href="">
+        <img src="images/icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        <b>Top Indian News</b>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container posts">
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script>
+    var url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
+    $.get(url, (response) => {
+      console.log(response.articles[0]);
+      for (i = 0; i < response.articles.length; i++) {
+        var html = `<div class="card m-3 shadow">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="${response.articles[i].urlToImage}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${response.articles[i].title}</h5>
+                <p class="card-text">${response.articles[i].content}</p>
+                <p class="card-text"><small class="text-muted">${response.articles[i].publishedAt} | ${response.articles[i].source.name} - ${response.articles[i].author}</small></p>
+            
+            <p>
+              <a href="${response.articles[i].url}" target="_blank" class="btn btn-secondary">Read More</a>
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+        $(".posts").append(html);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
